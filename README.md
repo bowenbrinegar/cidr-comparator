@@ -33,6 +33,23 @@
     1. 10011110110 => [HEAD] => 1 => 0 => 0 => 1 => 1 => 1 => 1 => 0 => 1 => 1 => 0 => (null) => "10011110110"
 1. Compares each string
 
+### Alternate Solution
+
+1. Logic in this repo can be simplified
+    1. Assumptions is n.n.n.n == [1-8bits].[1-8bits].[1-8bits].[1-8bits] == [group a].[group b].[group c].[group d]
+    1. Intaking "/1" | "/8" | "16" | "24" | "32" you can either convert group(s) [a-d] or subgroup of [a] in case "/1"
+        1. "/1" takes the 1st bit of [group a]
+        1. "/8" takes all of [group a]
+        1. "/16" takes all of [group a] and [group b] (regardless of the bit count within each group)
+        1. Eccetera.
+    1. Without converting to binary, you could compare the two serialized integers via strcmp
+    1. Alternatively, you could convert the subcharacters to their binary signatures of the 
+    serialized integer grouping and compare those through a loop. (flag inequality if exists; return flag;)
+1. Alternate simplification
+    1. Instead of creating a LinkedList on the conversion from integer to binary, you could concatenate a string
+    at the time of conversion. 
+        1. However, I am not sure which method is more efficient.
+
 ### Use Cases
 
 - In Cloud services you can use CIDR validation for resource permissioning
