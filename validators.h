@@ -13,7 +13,7 @@
 #endif //CIDR_COMPARISON_VALIDATORS_H
 
 
-int validate_ip(char *c) {
+int validate_ip_wfilter(char *c) {
     regex_t re;
     int value = regcomp(&re, "^(([0-9]{3}|[0-9]{1,3}|[0-9]{1,3})\\.){3}([0-9]){1,3}(\\/[0-9]{1,2})$", REG_EXTENDED);
     int status = regexec(&re, c, (size_t) 0, NULL, 0);
@@ -27,3 +27,19 @@ int validate_ip(char *c) {
 
     return status;
 }
+
+int validate_ip(char *c) {
+    regex_t re;
+    int value = regcomp(&re, "^(([0-9]{3}|[0-9]{1,3}|[0-9]{1,3})\\.){3}([0-9]){1,3}$", REG_EXTENDED);
+    int status = regexec(&re, c, (size_t) 0, NULL, 0);
+
+    if (value == 0) {
+        printf("\nRegEx compiled successfully.\n");
+    }
+    else {
+        printf("\nCompilation error.\n");
+    }
+
+    return status;
+}
+
