@@ -44,7 +44,6 @@ int concatints(int a, int b)
     return c;
 }
 
-/******
 
 int parse_ip(const char *ip) {
     char parsed[15] = "";
@@ -60,7 +59,6 @@ int parse_ip(const char *ip) {
     return (int) strtol(parsed, &ptr, 10);
 }
 
-******/
 
 int first_digit(int digit) {
     int first = digit;

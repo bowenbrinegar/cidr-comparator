@@ -17,20 +17,18 @@
 
 1. Validates each IP to predefined regex signature
 
-1. Parses bit count on first IP & Concatenates relavent amount into single integer
+1. Parses bit count on first IP & Concatenates relevant amount into single integer
     1. 127.0.0.1/1 => 1
     1. 127.0.0.1/8 => 127
     1. 127.0.0.1/16 => 1270
     1. 127.0.0.1/24 => 12700
     1. 127.0.0.1/32 => 127001
     
-1. Converts Concatenated Integer into a Singly Linked List containing the binary for each digit
+1. Converts Concatenated Integer into binary in string form
     1. 1270001 => 11111000000011001 (note program operates on flipped order)
     1. 1270 => 10011110110
     1. 127 => 1111111
     
-1. Converts Linked List of Binary to String
-    1. 10011110110 => [HEAD] => 1 => 0 => 0 => 1 => 1 => 1 => 1 => 0 => 1 => 1 => 0 => (null) => "10011110110"
 1. Compares each string
 
 ### Alternate Solution
@@ -45,10 +43,6 @@
     1. Without converting to binary, you could compare the two serialized integers via strcmp
     1. Alternatively, you could convert the subcharacters to their binary signatures of the 
     serialized integer grouping and compare those through a loop. (flag inequality if exists; return flag;)
-1. Alternate simplification
-    1. Instead of creating a LinkedList on the conversion from integer to binary, you could concatenate a string
-    at the time of conversion. 
-        1. However, I am not sure which method is more efficient.
 
 ### Use Cases
 

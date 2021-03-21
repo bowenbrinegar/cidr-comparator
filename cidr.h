@@ -1,76 +1,29 @@
 #include <stdio.h>
 #include "validators.h"
 #include "parseutils.h"
-#include "linkedlist.h"
 
 #ifndef CIDR_COMPARISON_CIDR_H
 #define CIDR_COMPARISON_CIDR_H
 
 #endif //CIDR_COMPARISON_CIDR_H
 
-struct ip {
-    struct list_node node;
-    int bit;
-};
-
-struct ip* new_ip(int bit, int type) {
-    struct ip* a = (struct ip*)malloc(sizeof(struct ip));
-    a->bit = bit;
-    a->node.type = type;
-    return a;
-};
-
-/******
-
-void printList(int type) {
-    struct list_node *ptr = head;
-
-    printf("\n[head] =>");
-    while (ptr != NULL) {
-        if (ptr->type == type) {
-            struct ip *n = (struct ip *) ptr;
-            printf(" %d => ", n->bit);
-        }
-        ptr = ptr->next;
-    }
-    printf(" [null]\n");
-};
-
-******/
-
-void toString(char *var[], int type) {
-    struct list_node *ptr = head;
+void convert(char *var[], int n) {
+    int rem, i = 1;
     char *str = malloc(100 * sizeof(char));
 
-    while (ptr != NULL) {
-        if (ptr->type == type) {
-            struct ip *n = (struct ip *) ptr;
-            char tmp[2];
-            sprintf(tmp, "%d", n->bit);
-            strcat(str, tmp);
-        }
-        ptr = ptr->next;
-    }
-
-    *var = str;
-};
-
-int *convert(int n, int type) {
-    int *result;
-    int rem, i = 1;
     while (n != 0) {
         rem = n % 2;
         n /= 2;
         i *= 10;
-        struct ip* entry = new_ip(rem, type);
-        list_add_node((struct list_node*)entry);
+        char tmp[2];
+        sprintf(tmp, "%d", rem);
+        strcat(str, tmp);
     }
-    return result;
-};
+
+    *var = str;
+}
 
 int cidrcmp( char *ipa, char *ipb)  {
-    list_init();
-
     if (validate_ip_wfilter(ipa) == 1) {
         printf("Invalid IP Address Entry (Regex Matching Error)\n");
         exit(1);
@@ -133,11 +86,7 @@ int cidrcmp( char *ipa, char *ipb)  {
     }
 
     char *a, *b;
-    convert(pre_a, 1);
-    convert(pre_b, 2);
-
-    toString(&a, 1);
-    toString(&b, 2);
-
+    convert(&a, pre_a);
+    convert(&b, pre_b);
     return strcmp(a, b);
 };
